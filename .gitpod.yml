@@ -1,10 +1,13 @@
 
 tasks:
   - init: npm install
-    command: npm run dev
+    command: |
+      export HMR_HOST='gp url 3000' 
+      echo "Starting dev server..."
+      npm run dev
 
 ports:
-  - port: 5173
+  - port: 3000
     onOpen: open-browser
 
 vscode:
