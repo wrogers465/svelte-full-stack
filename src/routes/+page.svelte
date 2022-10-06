@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
     import TodoItem from "$lib/todo-item.svelte";
-
+    
+    export let data: any;
+    export let todos: TodoItem[] = data.todos;
+    
     const title = "Todos";
 </script>
 
@@ -35,6 +38,12 @@
         border: 1px solid #ff3e00 !important;
         outline: none;
     }
+
+    input:focus::placeholder {
+        transition: 0.1s;
+        color: transparent;
+    }
+
 </style>
 
 <svelte:head>
@@ -44,12 +53,13 @@
 <div class="todos">
     <h1>{title}</h1>
 
-    <form action="" method="" class="new">
+    <form action="/todos.json" method="POST" class="new">
         <input type="text" name="text" aria-label="Add a todo" placeholder="+ type to add a todo">
     </form>
 
-    <TodoItem />
-    <TodoItem />
-    <TodoItem />
+    {#each todos as todo}
+        <TodoItem />
+    {/each}
+
 </div>
 
