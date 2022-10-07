@@ -2,7 +2,7 @@
     import TodoItem from "$lib/todo-item.svelte";
     
     export let data: any;
-    export let todos: TodoItem[] = data.todos;
+    export let todos: Todo[] = data.todos;
     
     const title = "Todos";
 </script>
@@ -58,7 +58,7 @@
     </form>
 
     {#each todos as todo}
-        <TodoItem />
+        <TodoItem {todo}/>
     {/each}
 
 </div>
