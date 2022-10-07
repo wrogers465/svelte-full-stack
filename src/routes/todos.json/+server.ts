@@ -13,11 +13,13 @@ export const GET: RequestHandler = async () => {
 export const POST: RequestHandler = async ({ request }) => {
     const form = await request.formData();
     const todoItem = form.get("text");
+
     todos.push({
         created_at: new Date(),
-        text: JSON.stringify(form.get("text")),
+        text: form.get("text"),
         done: false
     });
+    console.log(todos);
     return new Response(JSON.stringify(todos), {
         status: 303,
         headers: {

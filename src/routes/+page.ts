@@ -8,11 +8,11 @@ export const load: PageLoad = async ({ fetch }) => {
         return {
             todos: todos
         }
-    }
-
-    const { message } = await res.json();
-    return {
-        error: new Error(message)
+    } else {
+        const { message } = await res.json();
+        return {
+            error: new Error(message)
+        }
     }
 }
 

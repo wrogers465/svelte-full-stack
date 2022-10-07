@@ -2,6 +2,6 @@
 
 type Todo = {
     created_at: Date;
-    text: string;
+    text: ?FormDataEntryValue;
     done: boolean;
 }
