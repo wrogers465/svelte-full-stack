@@ -1,7 +1,4 @@
 import type { RequestHandler } from "@sveltejs/kit";
+import { api } from "../../_api/+server"
 
-export const GET: RequestHandler = async (request) => {
-    return new Response(request.params.uid, {
-        status: 200
-    });
-}
+

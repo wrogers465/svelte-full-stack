@@ -1,29 +1,11 @@
 import type { RequestHandler } from "@sveltejs/kit";
+import { api } from "../_api/+server" 
 
 
-//TODO: Persist in database
-let todos: Todo[] = [];
-
-export const GET: RequestHandler = async () => {
-    return new Response(JSON.stringify(todos), {
-        status: 200,
-    });
+export const GET: RequestHandler = ({ request }) => {
+    return api(request);
 }
 
-export const POST: RequestHandler = async ({ request }) => {
-    const form = await request.formData();
-    const todoItem = form.get("text");
-
-    todos.push({
-        created_at: new Date(),
-        text: form.get("text"),
-        done: false
-    });
-    console.log(todos);
-    return new Response(JSON.stringify(todos), {
-        status: 303,
-        headers: {
-            location: "/"
-        }
-    });
+export const POST: RequestHandler = ({ request }) => {
+    return api(request);
 }
