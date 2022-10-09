@@ -1,18 +1,19 @@
-import type { RequestHandler } from "@sveltejs/kit";
+import type { RequestEvent } from "@sveltejs/kit";
 
 let todos: Todo[] = [];
 
-export const api = async (request: Request) => {
+export const api = async (requestEvent: RequestEvent, overrideMethod?: String) => {
     let body = {};
     let status = 500;
+    let method = overrideMethod ?? requestEvent.request.method;
 
-    switch (request.method.toUpperCase()) {
+    switch (method.toUpperCase()) {
         case "GET":
             body = todos;
             status = 200;
             break;
         case "POST":
-            const form = await request.formData();
+            const form = await requestEvent.request.formData();
             const todoItem = form.get("text");
 
             todos.push({
@@ -21,7 +22,10 @@ export const api = async (request: Request) => {
                 done: false
             });
             body = todos;
-            status = 303;           
+            status = 303;
+        case "DELETE":
+            status = 303;
+            console.log("Deletion just occurred.");          
 
         default:
             break;
