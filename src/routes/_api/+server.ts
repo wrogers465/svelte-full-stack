@@ -23,6 +23,7 @@ export const api = async (requestEvent: RequestEvent, overrideMethod?: String) =
             });
             body = todos;
             status = 303;
+            break;
         case "DELETE":
             status = 303;
             console.log("Deletion just occurred.");          
