@@ -17,6 +17,7 @@ export const api = async (requestEvent: RequestEvent, overrideMethod?: String) =
             const todoItem = form.get("text");
 
             todos.push({
+                uid: Date.now().toString(),
                 created_at: new Date(),
                 text: form.get("text"),
                 done: false
@@ -26,12 +27,14 @@ export const api = async (requestEvent: RequestEvent, overrideMethod?: String) =
             break;
         case "DELETE":
             status = 303;
-            console.log("Deletion just occurred.");          
+            body = todos;
+            console.log("Deletion just occurred.");
+            break;          
 
         default:
             break;
     }
-
+    
     return new Response(JSON.stringify(body), {
         status: status,
         headers: {
