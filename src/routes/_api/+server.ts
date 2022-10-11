@@ -9,7 +9,6 @@ export const api = async (requestEvent: RequestEvent, overrideMethod?: String) =
 
     switch (method.toUpperCase()) {
         case "GET":
-            body = todos;
             status = 200;
             break;
         case "POST":
@@ -22,20 +21,18 @@ export const api = async (requestEvent: RequestEvent, overrideMethod?: String) =
                 text: form.get("text"),
                 done: false
             });
-            body = todos;
             status = 303;
             break;
         case "DELETE":
+            todos = todos.filter(todo => todo.uid !== requestEvent.params.uid)
             status = 303;
-            body = todos;
-            console.log("Deletion just occurred.");
             break;          
-
         default:
             break;
     }
     
-    return new Response(JSON.stringify(body), {
+    body = todos;
+    return new Response(JSON.stringify(todos), {
         status: status,
         headers: {
             location: "/"
